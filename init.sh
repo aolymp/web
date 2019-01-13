@@ -11,5 +11,8 @@ sudo /etc/init.d/mysql start
 echo "create database ..."
 mysql -uroot -e 'CREATE DATABASE `ural` CHARACTER SET utf8;'
 mysql -uroot -e 'CREATE USER "portal"@"%" IDENTIFIED BY "m5portal";'
-mysql -uroot -e 'GRANT ALL PRIVILEGES ON ural.* TO "portal"@"%";'
+mysql -uroot -e 'GRANT ALL PRIVILEGES ON ural.* TO "portal"@"%" with grant option;'
 mysql -uroot -e 'FLUSH PRIVILEGES;'
+cd ~/web/ask
+python3 ~/web/ask/manage.py makemigrations
+python3 ~/web/ask/manage.py migrate
